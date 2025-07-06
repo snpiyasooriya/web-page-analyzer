@@ -2,9 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Web Page Analyzer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .analyzer-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+        input[type="url"] {
+            padding: 10px;
+            width: 70%;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
+    <h1>Web Page Analyzer</h1>
 
+    <div class="analyzer-container">
+        <h2>Enter a URL to analyze</h2>
+        <form action="/analyze" method="post">
+            <input
+                type="url"
+                id="url"
+                name="url"
+                placeholder="https://example.com"
+                required>
+            <button type="submit">Analyze</button>
+        </form>
+    </div>
 </body>
 </html>
