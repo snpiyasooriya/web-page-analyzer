@@ -1,0 +1,28 @@
+run:
+  # timeout for analysis, e.g. 30s, 5m, default is 1m
+  timeout: 5m
+
+linters:
+  # Enable all default linters and some additional ones.
+  # Run `golangci-lint help linters` to see all available linters.
+  enable-all: false
+  disable-all: false
+  enable:
+    - govet
+    - errcheck
+    - staticcheck
+    - unused
+    - goimports
+    - misspell
+    - ineffassign
+    - typecheck
+    - revive
+
+linters-settings:
+  goimports:
+    # Put imports into separate groups.
+    local-prefixes: github.com/snpiyasooriya/web-page-analyzer
+
+issues:
+  # Maximum issues of the same type to report.
+  max-same-issues: 10
