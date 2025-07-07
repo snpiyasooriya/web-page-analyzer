@@ -63,9 +63,15 @@
         <p><strong>Inaccessible Internal Links:</strong> {{.InaccessibleInternalLinksCount}}</p>
         <p><strong>Inaccessible External Links:</strong> {{.InaccessibleExternalLinksCount}}</p>
         
-        <h3>All Links</h3>
+        <h3>Internal Links</h3>
         <ul>
-            {{range .Links}}
+            {{range .InternalLinks}}
+            <li>{{.}}</li>
+            {{end}}
+        </ul>
+        <h3>External Links</h3>
+        <ul>
+            {{range .ExternalLinks}}
             <li>{{.}}</li>
             {{end}}
         </ul>

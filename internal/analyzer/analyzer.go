@@ -16,7 +16,8 @@ type AnalysisResult struct {
 	InaccessibleInternalLinksCount int
 	InaccessibleExternalLinksCount int
 	HasLoginForm                   bool
-	Links                          []string
+	InternalLinks                  []string
+	ExternalLinks                  []string
 }
 
 func Analyze(body io.Reader) (*AnalysisResult, error) {
@@ -50,7 +51,14 @@ func traverseTags(n *html.Node, result *AnalysisResult) {
 		case "a":
 			for _, attr := range n.Attr {
 				if attr.Key == "href" && attr.Val != "" {
-					result.Links = append(result.Links, attr.Val)
+					if strings.Contains(attr.Val, "http") || strings.Contains(attr.Val, "https") {
+						result.ExternalLinks = append(result.ExternalLinks, attr.Val)
+						result.ExternalLinksCount++
+					} else {
+						result.InternalLinks = append(result.InternalLinks, attr.Val)
+						result.InternalLinksCount++
+					}
+
 				}
 			}
 		case "form":
