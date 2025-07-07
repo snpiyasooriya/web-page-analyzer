@@ -4,25 +4,22 @@ import (
 	"io"
 	"strings"
 
+	"github.com/snpiyasooriya/web-page-analyzer/internal/logger"
 	"golang.org/x/net/html"
 )
 
 type AnalysisResult struct {
-	HTMLVersion                    string
-	Title                          string
-	Headings                       map[string]int
-	InternalLinksCount             int
-	ExternalLinksCount             int
-	InaccessibleInternalLinksCount int
-	InaccessibleExternalLinksCount int
-	HasLoginForm                   bool
-	InternalLinks                  []string
-	ExternalLinks                  []string
+	HTMLVersion  string
+	Title        string
+	Headings     map[string]int
+	HasLoginForm bool
+	Links        []string
 }
 
 func Analyze(body io.Reader) (*AnalysisResult, error) {
 	doc, err := html.Parse(body)
 	if err != nil {
+		logger.WithField("error", err).Error("Failed to parse HTML")
 		return nil, err
 	}
 
@@ -51,14 +48,7 @@ func traverseTags(n *html.Node, result *AnalysisResult) {
 		case "a":
 			for _, attr := range n.Attr {
 				if attr.Key == "href" && attr.Val != "" {
-					if strings.Contains(attr.Val, "http") || strings.Contains(attr.Val, "https") {
-						result.ExternalLinks = append(result.ExternalLinks, attr.Val)
-						result.ExternalLinksCount++
-					} else {
-						result.InternalLinks = append(result.InternalLinks, attr.Val)
-						result.InternalLinksCount++
-					}
-
+					result.Links = append(result.Links, attr.Val)
 				}
 			}
 		case "form":
