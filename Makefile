@@ -83,4 +83,4 @@ help:
 	@echo "  docker-run    - Run Docker container"
 	@echo "  help          - Show this help"
 
-.PHONY: build build-linux run dev clean test test-coverage test-coverage-xml deps swagger fmt lint vet mocks install-tools docker-build docker-run help
+.PHONY: build build-linux run clean test test-coverage test-coverage-xml deps fmt lint vet docker-build docker-run help
