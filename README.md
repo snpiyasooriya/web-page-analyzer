@@ -39,6 +39,12 @@ make lint
 make vet
 ```
 
+## CI/CD
+- The application uses GitHub Actions for continuous integration and deployment.
+- Pull requests trigger linting, formatting, and testing.
+- Merges to main trigger a Docker build and push to Amazon ECR, followed by a deployment to Amazon ECS.
+
+
 ## Key Design Notes
 - **Architecture:** A pragmatic layered architecture was chosen to ensure clear separation of concerns (handler, service, analyzer) while remaining idiomatic and easy to navigate.
 - **Concurrency:** A concurrent worker pool is used for checking link accessibility. This significantly improves performance on pages with many links and is a core feature of the application's design.
