@@ -10,11 +10,11 @@ BINARY_UNIX=$(BINARY_NAME)_unix
 
 # Build the application
 build:
-	$(GOBUILD) -o $(BINARY_NAME) -v .
+	$(GOBUILD) -o $(BINARY_NAME) -v ./cmd
 
 # Build for linux
 build-linux:
-	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GOBUILD) -o $(BINARY_UNIX) -v .
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GOBUILD) -o $(BINARY_UNIX) -v ./cmd
 
 # Run the application
 run:
