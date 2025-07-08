@@ -18,7 +18,7 @@ build-linux:
 
 # Run the application
 run:
-	$(GOCMD) run main.go
+	$(GOCMD) run cmd/main.go
 
 # Clean build files
 clean:
